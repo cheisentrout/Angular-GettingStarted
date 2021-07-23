@@ -1,4 +1,7 @@
 {
   "files.autoSave": "afterDelay",
-  "html.format.wrapAttributes": "force-aligned"
+  "html.format.wrapAttributes": "force-aligned",
+  "workbench.tree.indent": 20,
+"editor.lineHeight": 1.5,
+  "editor.detectIndentation": false
 }

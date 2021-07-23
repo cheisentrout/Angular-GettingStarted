@@ -14,7 +14,7 @@ DECORATOR / TEMPLATE
 =============================================*/
 
 @Component({
-    selector: "pm-products",
+    // selector: "pm-products", -- leave this in to use as an HTML directive if needed!
     templateUrl: "./product-list.component.html",
     styleUrls: ["./product-list.component.css"],
 })
