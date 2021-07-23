@@ -2,11 +2,12 @@
 IMPORTS
 =============================================*/
 
-import { Component } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { IProduct } from "./product";
 import { OnInit } from "@angular/core"
 import { Message } from "@angular/compiler/src/i18n/i18n_ast";
 import { ProductService } from "./product.service";
+import { Subscription } from "rxjs";
 
 /*=============================================
 DECORATOR / TEMPLATE
@@ -24,11 +25,13 @@ CLASS
 
 // this class is exported, and ProductListComponent is in the array in our app.module.ts file
 // as a declaration, so our module knows to reference this
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
     pageTitle: string  = "Product List";
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage: boolean = false;
+    errMessage: string = ''
+    sub!: Subscription
 
     // "private" is a "backing variable", designed to hold the value managed by the getter and setter
     private _listFilter: string = '';
@@ -60,10 +63,21 @@ export class ProductListComponent implements OnInit {
           this.showImage = !this.showImage;
       }
 
+    /* ngOnInit is a built in Angular lifecycle method that executes the following
+        code upon page load. Inside the .subscribe method is an object known as an
+        Observer object. */
       ngOnInit(): void {
-          console.log("OnInit logging")
-          this.products = this.productService.getProducts()
-          this.filteredProducts = this.products
+          this.sub = this.productService.getProducts().subscribe({
+            next: products =>  { 
+                this.products = products;
+                this.filteredProducts = this.products
+            },
+            error: err => this.errMessage = err
+          })
+      }
+
+      ngOnDestroy() {
+        this.sub.unsubscribe()
       }
 
       onRatingClicked(message: string): void {
