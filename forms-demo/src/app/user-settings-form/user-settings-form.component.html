@@ -1,0 +1,76 @@
+<div class="container">
+    <h2>User Settings</h2>
+    <!-- #form is a "template reference variable" -->
+    <form #form="ngForm">
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <!-- [(ngModel)] designates two-way data binding
+            so that the input box can affect the userSettings data,
+            and vice versa -->    
+            <input id="name" 
+                name="name" 
+                class="form-control"
+                [(ngModel)]="userSettings.name" />
+        </div>
+
+        <!-- Below radio input field copy / pasted from Bootstrap docs -->
+        <div class="form-check form-group">
+            <input class="form-check-input" 
+                type="checkbox" 
+                name="emailOffers" 
+                id="emailOffers" 
+                [(ngModel)]="userSettings.emailOffers">
+            <label class="form-check-label" for="emailOffers" >
+              Email Special Offers
+            </label>
+        </div>
+
+        <p>User Interface Styling</p>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="interfaceStyle" 
+                id="lightInterface" value="light" for="lightInterface" checked
+                [(ngModel)]="userSettings.interfaceStyle" />
+            <label class="form-check-label" for="lightInterface">
+              Light
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="interfaceStyle" 
+                id="mediumInterface" value="medium" for="mediumInterface" [(ngModel)]="userSettings.interfaceStyle" />
+            <label class="form-check-label" for="mediumInterface">
+              Medium
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="interfaceStyle" 
+                id="darkInterface" value="dark" for="darkInterface" [(ngModel)]="userSettings.interfaceStyle" />
+            <label class="form-check-label" for="darkInterface">
+              Dark
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label for="subscriptionType">Subscription Type</label>
+            <select class="form-control" id="subscriptionType" name="subscriptionType" 
+                [(ngModel)]="userSettings.subscriptionType">
+                <option>Monthly</option>
+                <option>Annual</option>
+                <option>Lifetime</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes"
+                class="form-control" rows="3"
+                [(ngModel)]="userSettings.notes" ></textarea>
+        </div>
+
+        <button class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+<!-- when this is listed as simply form | json, 
+I was getting a circular typeError in dev tools -->
+<h3>{{ userSettings | json }}</h3>
