@@ -62,9 +62,11 @@
             <label for="subscriptionType">Subscription Type</label>
             <select class="form-control" id="subscriptionType" name="subscriptionType" 
                 [(ngModel)]="userSettings.subscriptionType">
-                <option>Monthly</option>
-                <option>Annual</option>
-                <option>Lifetime</option>
+                <!-- the async pipe must be added below because the variable "subscriptionTypes" 
+                    is now an Observable, and will be returned asychronously -->
+                <option *ngFor="let type of subscriptionTypes | async">
+                    {{ type }}
+                </option>
             </select>
         </div>
 
@@ -75,6 +77,11 @@
                 [(ngModel)]="userSettings.notes" ></textarea>
         </div>
 
+        <!-- Post error message, hidden div on the condition that postError resolves to false: -->
+        <div [hidden]="!postError"
+            class="alert alert-danger">
+                 {{ postErrorMessage }}
+        </div>
         <button class="btn btn-primary">Save</button>
     </form>
 </div>
