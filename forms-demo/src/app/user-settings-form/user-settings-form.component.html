@@ -1,7 +1,7 @@
 <div class="container">
     <h2>User Settings</h2>
     <!-- #form is a "template reference variable" -->
-    <form #form="ngForm">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 
         <div class="form-group">
             <label for="name">Name</label>
@@ -11,7 +11,15 @@
             <input id="name" 
                 name="name" 
                 class="form-control"
-                [(ngModel)]="userSettings.name" />
+                [(ngModel)]="userSettings.name" 
+                required
+                #nameField="ngModel"
+                (blur)="onBlur(nameField)"
+                [class.field-error]="form.submitted && nameField.invalid"/>
+            <div [hidden]="!form.submitted || nameField.valid"
+                class="alert alert-danger">
+                Enter a Name
+            </div>
         </div>
 
         <!-- Below radio input field copy / pasted from Bootstrap docs -->
