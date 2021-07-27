@@ -22,6 +22,14 @@
             </div>
         </div>
 
+        <button type="button" class="btn btn-primary" name="singleModel"
+             [(ngModel)]="singleModel" btnCheckbox>
+             <!-- Had to extract this from the button attrbutes, throwing an error about
+                    type "String" not being assignable to type "boolean": btnCheckboxTrue="On" btnCheckboxFalse="Off" -->
+                 {{ singleModel }}
+        </button>
+
+
         <!-- Below radio input field copy / pasted from Bootstrap docs -->
         <div class="form-check form-group">
             <input class="form-check-input" 
@@ -33,6 +41,9 @@
               Email Special Offers
             </label>
         </div>
+
+        <!-- There are much more contemporary radio button styles available in the ngx-bootstrap
+            library -- could replace these: -->
 
         <p>User Interface Styling</p>
         <div class="form-check">

@@ -20,6 +20,8 @@ export class UserSettingsFormComponent implements OnInit {
     notes: null
   }
 
+  singleModel: string = "On"
+
   /* Creating an original version of the user data, and then the typical version below,
   is one way to protect data in the case that a form is deleted, refreshed, or somehow loses
   its data before it's submitted. */
