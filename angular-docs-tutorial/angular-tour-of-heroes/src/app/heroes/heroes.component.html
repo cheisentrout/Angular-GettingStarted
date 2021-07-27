@@ -1,10 +1,18 @@
-<h2>
+<!-- ALL HEROES LIST -->
+
+<h2>My Heroes</h2>
   <ul class="heroes">
     <!-- The *ngFor attribute renders an <li> element
       for every item in the heroes property of the associated
       heroes.component.ts file. Since the heroes property
       is an array of Hero items (hero.ts interface custom
       type), one <li> is registered for each Hero in the array.*ngFor
+
+      Within the square braces, we are using CLASS BINDING
+      to check if the current <li>'s hero matches the ts file's
+        selectedHero property. If it does, a CSS class called
+        "selected" is applied. If the hero is NOT the current
+        selectedHero, the class is taken off.
 
       Then, when the <li> is clicked on (bound to the element
         by the (click) event), the single hero associated with
@@ -14,22 +22,13 @@
 
       Finally, the hero id and name are rendered with interpolation binding.-->
     <li *ngFor="let hero of heroes"
-        (click)="onSelect(hero)">
+          [class.selected]="hero === selectedHero"
+          (click)="onSelect(hero)">
       <span class="badge">{{ hero.id }}</span>
       {{ hero.name }}
     </li>
   </ul>
 
-
-
-
-<!-- </h2>
-<h2> {{ hero.name | uppercase }} Details</h2>
-<div>
-  <span>id:</span>
-  {{ hero.id }}
-</div>
-<div>
-  <label for="name">Hero name: </label>
-  <input id="name" [(ngModel)]="hero.name" placeholder="name"/>
-</div> -->
+  <!-- Here, we list the hero-detail component as a child component to the
+  heroes component. We pass  -->
+  <app-hero-detail [hero]="selectedHero"></app-hero-detail>
