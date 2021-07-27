@@ -1,0 +1,35 @@
+<h2>
+  <ul class="heroes">
+    <!-- The *ngFor attribute renders an <li> element
+      for every item in the heroes property of the associated
+      heroes.component.ts file. Since the heroes property
+      is an array of Hero items (hero.ts interface custom
+      type), one <li> is registered for each Hero in the array.*ngFor
+
+      Then, when the <li> is clicked on (bound to the element
+        by the (click) event), the single hero associated with
+        THAT <li> is passed to the hero.component.ts file method
+        "onSelect", which reassigns the class's hero property
+        to the clicked hero.
+
+      Finally, the hero id and name are rendered with interpolation binding.-->
+    <li *ngFor="let hero of heroes"
+        (click)="onSelect(hero)">
+      <span class="badge">{{ hero.id }}</span>
+      {{ hero.name }}
+    </li>
+  </ul>
+
+
+
+
+<!-- </h2>
+<h2> {{ hero.name | uppercase }} Details</h2>
+<div>
+  <span>id:</span>
+  {{ hero.id }}
+</div>
+<div>
+  <label for="name">Hero name: </label>
+  <input id="name" [(ngModel)]="hero.name" placeholder="name"/>
+</div> -->
